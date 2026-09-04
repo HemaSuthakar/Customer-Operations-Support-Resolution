@@ -1,0 +1,5 @@
+[
+{"conversation_id":"DEMO-A","customer_id":"CUST-1001","messages":[{"role":"customer","message":"My broadband is not working. It affects my laptop and phone, and the router internet light is red."}]},
+{"conversation_id":"DEMO-B","customer_id":"CUST-1007","messages":[{"role":"customer","message":"My broadband keeps dropping again. I have restarted the router multiple times and this is my third ticket."}]},
+{"conversation_id":"DEMO-C","customer_id":"CUST-1003","messages":[{"role":"customer","message":"My broadband is slow. It affects my laptop and phone. A speed test near the router shows 22 Mbps."}]}
+]

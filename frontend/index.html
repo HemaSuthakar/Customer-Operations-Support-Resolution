@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaConnect Resolution Desk</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">N</span><div><strong>NovaConnect</strong><span>Resolution desk</span></div></div>
+      <div class="topbar-meta"><span class="live-dot"></span><span>Workspace ready</span><span class="date-label">04 Sep 2026</span></div>
+    </header>
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-heading"><div><span class="eyebrow">CASE INTAKE</span><h1>Customer record</h1></div><span class="count-pill" id="customerCount">10</span></div>
+        <label class="search-box"><span>⌕</span><input id="customerSearch" placeholder="Search customer or ID" /></label>
+        <div id="customerList" class="customer-list"></div>
+        <div class="sidebar-note"><span class="note-icon">✦</span><div><strong>Grounded assistance</strong><p>Recommendations are limited to verified account facts and retrieved procedures.</p></div></div>
+      </aside>
+      <section class="main-column">
+        <div class="section-header"><div><span class="eyebrow">ACTIVE CASE</span><h2 id="caseTitle">Select a customer to begin</h2></div><div class="case-actions"><button class="ghost-button" id="demoNormal">Load demo A</button><button class="ghost-button" id="demoEscalation">Load demo B</button></div></div>
+        <div id="accountStrip" class="account-strip empty-state"><span>Select a customer record from the queue.</span></div>
+        <section class="conversation-panel panel">
+          <div class="panel-heading"><div><span class="eyebrow">CONVERSATION</span><h3>Customer message</h3></div><span class="context-chip">Live context</span></div>
+          <div id="conversationHistory" class="conversation-history"><div class="conversation-empty">The current conversation will appear here.</div></div>
+          <div class="compose-row"><textarea id="messageInput" rows="3" placeholder="Enter the customer's latest message..."></textarea><button id="analyzeButton" class="primary-button"><span>Analyze case</span><span class="arrow">→</span></button></div>
+        </section>
+        <div id="analysisEmpty" class="analysis-empty"><div class="empty-glyph">◎</div><h3>Ready for a grounded review</h3><p>Select a customer and enter the conversation. The desk will classify the case, surface evidence, and prepare the next action.</p></div>
+        <section id="analysisPanel" class="analysis-panel hidden"></section>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>
