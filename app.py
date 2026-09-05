@@ -110,6 +110,15 @@ class Message(BaseModel):
     message: str = Field(min_length=1, max_length=2000)
 
 
+class CreateCustomerRequest(BaseModel):
+    name: str = Field(min_length=2, max_length=100)
+    service_type: Literal["broadband", "mobile"] = "broadband"
+    plan: str = Field(min_length=5, max_length=100)
+    billing_status: Literal["paid", "overdue", "payment_failed"] = "paid"
+    account_status: Literal["active", "suspended"] = "active"
+    service_status: Literal["active", "inactive"] = "active"
+
+
 class AnalyzeRequest(BaseModel):
     customer_id: str = Field(min_length=3, max_length=30)
     conversation: list[Message] = Field(min_length=1, max_length=30)
@@ -262,6 +271,28 @@ def health() -> dict[str, Any]:
 @app.get("/api/customers")
 def customers() -> list[dict[str, Any]]:
     return [{"customer_id": item["customer_id"], "name": item["name"], "service_type": item["service_type"], "plan": item["plan"], "billing_status": item["billing_status"], "account_status": item["account_status"]} for item in CUSTOMERS.values()]
+
+
+@app.post("/api/customers")
+def create_customer(request: CreateCustomerRequest) -> dict[str, Any]:
+    # Generate next customer ID
+    existing_ids = [int(cid.split("-")[1]) for cid in CUSTOMERS.keys() if cid.startswith("CUST-")]
+    next_id = max(existing_ids) + 1 if existing_ids else 1001
+    customer_id = f"CUST-{next_id:04d}"
+    
+    new_customer = {
+        "customer_id": customer_id,
+        "name": request.name,
+        "service_type": request.service_type,
+        "plan": request.plan,
+        "billing_status": request.billing_status,
+        "account_status": request.account_status,
+        "service_status": request.service_status,
+        "last_payment_date": "2026-09-05",
+        "recent_tickets": [],
+    }
+    CUSTOMERS[customer_id] = new_customer
+    return new_customer
 
 
 @app.get("/api/customers/{customer_id}")

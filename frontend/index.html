@@ -10,17 +10,45 @@
   <div class="app-shell">
     <header class="topbar">
       <div class="brand"><span class="brand-mark">N</span><div><strong>NovaConnect</strong><span>Resolution desk</span></div></div>
-      <div class="topbar-meta"><span class="live-dot"></span><span>Workspace ready</span><span class="date-label">04 Sep 2026</span></div>
+      <div class="topbar-meta">
+        <span class="live-dot"></span>
+        <span>Workspace ready</span>
+        <span class="date-label">04 Sep 2026</span>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode">Dark mode</button>
+      </div>
     </header>
     <main class="workspace">
       <aside class="sidebar">
         <div class="sidebar-heading"><div><span class="eyebrow">CASE INTAKE</span><h1>Customer record</h1></div><span class="count-pill" id="customerCount">10</span></div>
+        <div class="sidebar-actions"><button id="addCustomerBtn" class="add-customer-btn" title="Add a new customer">+ Add customer</button></div>
         <label class="search-box"><span>⌕</span><input id="customerSearch" placeholder="Search customer or ID" /></label>
         <div id="customerList" class="customer-list"></div>
         <div class="sidebar-note"><span class="note-icon">✦</span><div><strong>Grounded assistance</strong><p>Recommendations are limited to verified account facts and retrieved procedures.</p></div></div>
       </aside>
       <section class="main-column">
         <div class="section-header"><div><span class="eyebrow">ACTIVE CASE</span><h2 id="caseTitle">Select a customer to begin</h2></div><div class="case-actions"><button class="ghost-button" id="demoNormal">Load demo A</button><button class="ghost-button" id="demoEscalation">Load demo B</button></div></div>
+        <div class="metrics-grid" aria-label="Operational dashboard summary">
+          <div class="metric-card metric-teal">
+            <span class="metric-label">Queue depth</span>
+            <strong id="metricQueue">0</strong>
+            <small>customers</small>
+          </div>
+          <div class="metric-card metric-blue">
+            <span class="metric-label">Needs info</span>
+            <strong id="metricNeeds">0</strong>
+            <small>cases</small>
+          </div>
+          <div class="metric-card metric-amber">
+            <span class="metric-label">Escalations</span>
+            <strong id="metricEscalations">0</strong>
+            <small>pending</small>
+          </div>
+          <div class="metric-card metric-green">
+            <span class="metric-label">Resolved</span>
+            <strong id="metricResolved">0</strong>
+            <small>today</small>
+          </div>
+        </div>
         <div id="accountStrip" class="account-strip empty-state"><span>Select a customer record from the queue.</span></div>
         <section class="conversation-panel panel">
           <div class="panel-heading"><div><span class="eyebrow">CONVERSATION</span><h3>Customer message</h3></div><span class="context-chip">Live context</span></div>
@@ -33,6 +61,62 @@
     </main>
   </div>
   <div id="toast" class="toast"></div>
+  <div id="addCustomerModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Add new customer</h2>
+        <button id="closeModal" class="close-button" aria-label="Close">×</button>
+      </div>
+      <form id="addCustomerForm" class="customer-form">
+        <div class="form-group">
+          <label for="customerName">Customer name *</label>
+          <input id="customerName" type="text" required placeholder="Full name" maxlength="100" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="serviceType">Service type *</label>
+            <select id="serviceType" required>
+              <option value="broadband">Broadband</option>
+              <option value="mobile">Mobile</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="plan">Plan *</label>
+            <input id="plan" type="text" required placeholder="e.g., Fiber 100 Mbps" maxlength="100" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="billingStatus">Billing status *</label>
+            <select id="billingStatus" required>
+              <option value="paid">Paid</option>
+              <option value="overdue">Overdue</option>
+              <option value="payment_failed">Payment failed</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="accountStatus">Account status *</label>
+            <select id="accountStatus" required>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="serviceStatus">Service status *</label>
+          <select id="serviceStatus" required>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="cancelForm" class="ghost-button">Cancel</button>
+          <button type="submit" class="primary-button">Create customer</button>
+        </div>
+      </form>
+    </div>
+  </div>
   <script src="/app.js"></script>
 </body>
 </html>

@@ -71,9 +71,6 @@ Every citation is built from a retrieved article object and includes its article
 
 The handoff includes the reason, issue summary, established account facts, attempted steps, missing information, and relevant retrieved evidence. This means the customer does not need to repeat the case to the next agent.
 
-## Demo Video
-
-Demo video: <VIDEO_LINK>
 
 ## Demo scenarios
 
